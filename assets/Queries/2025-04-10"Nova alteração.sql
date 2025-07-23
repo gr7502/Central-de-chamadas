@@ -1,0 +1,1 @@
+ALTER TABLE fila_chamadas ADD COLUMN falada BOOLEAN DEFAULT FALSE;

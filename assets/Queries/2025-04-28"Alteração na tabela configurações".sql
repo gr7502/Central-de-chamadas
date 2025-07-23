@@ -1,0 +1,1 @@
+alter table configurations add column panel_view varchar (255);

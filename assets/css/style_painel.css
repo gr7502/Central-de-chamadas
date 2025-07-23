@@ -1,0 +1,164 @@
+/* Estilos gerais */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fadc;
+  margin: 0;
+  padding: 0;
+}
+
+/* Cabeçalho */
+.info-consulta-header {
+  display: flex;
+  height: 250px;
+  font-size: 2em;
+  padding: 20px;
+  background-color: #4c259f !important;
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.info-consulta-header strong {
+  font-size: 1.5em; /* Aumentado */
+}
+
+/* Layout principal */
+.container-fluid.flex-grow-1 {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+main.row {
+  display: flex;
+  flex: 1;
+  gap: 20px; /* Espaço entre o vídeo e a coluna de chamados */
+  padding: 20px;
+}
+
+.col-md-8 {
+  flex: 3; /* O vídeo ocupará 3 partes do espaço */
+}
+
+.video-container {
+  background-color: #000;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%; /* Mantém o tamanho proporcional */
+}
+
+/* Últimos chamados */
+aside {
+  background-color: #fff;
+  width: 35% !important;
+  height: auto;
+  border-radius: 14px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+aside h2 {
+  font-size: 2em; /* Aumentado */
+  font-weight: bold;
+  color: #4c259f;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Estilos para as divs de chamada */
+.chamada {
+  padding: 20px; /* Aumentei o padding para mais espaço interno */
+  border-radius: 10px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  min-height: 100px; /* Altura mínima para todas as divs */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centraliza o conteúdo verticalmente */
+}
+
+.chamada .senha,
+.chamada .paciente-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Aumentei o espaçamento entre os elementos */
+}
+
+.chamada .senha .fw-bold,
+.chamada .paciente-info .fw-bold {
+  font-size: 1.2em; /* Aumentei o tamanho da fonte */
+  color: inherit; /* Herda a cor do elemento pai */
+}
+
+.chamada .senha .numero-senha,
+.chamada .paciente-info .nome {
+  font-size: 1.4em; /* Aumentei o tamanho da fonte */
+  font-weight: bold;
+  color: inherit; /* Herda a cor do elemento pai */
+}
+
+.chamada .guiche,
+.chamada .destino {
+  font-size: 1.2em; /* Aumentei o tamanho da fonte */
+  color: inherit; /* Herda a cor do elemento pai */
+}
+
+/* Estilo para a chamada em destaque */
+.chamada.destaque {
+  background-color: #4c259f !important; /* Roxo */
+  color: #fff;
+}
+
+.chamada.destaque .senha .fw-bold,
+.chamada.destaque .senha .numero-senha,
+.chamada.destaque .guiche {
+  color: #fff;
+}
+
+/* Estilo para as chamadas de pacientes */
+.chamada.paciente {
+  background-color: #e9ecef;
+}
+
+/* Rodapé */
+.footer {
+  font-size: medium;
+  background-color: #e2e2e2 !important;
+  color: #000000 !important;
+  padding: 10px 0;
+}
+
+.footer strong {
+  color: #4c259f;
+}
+
+.chm_primary {
+  background-color: #fff !important;
+  color: #000000 !important;
+}
+
+/* Classe para fundo branco e texto preto */
+.chamada-branca {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* Classe para fundo #4c259f e texto branco */
+.chamada-roxa {
+  background-color: #4c259f;
+  color: #ffffff;
+}
+
+
+.chamada-roxa,
+.chamada-roxa * {
+  color: #ffffff !important;
+}

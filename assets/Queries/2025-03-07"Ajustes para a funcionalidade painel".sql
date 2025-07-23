@@ -1,0 +1,6 @@
+CREATE TABLE chamadas (
+    id SERIAL PRIMARY KEY,
+    paciente VARCHAR(255) NOT NULL,
+    sala VARCHAR(255) NOT NULL,
+    chamado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

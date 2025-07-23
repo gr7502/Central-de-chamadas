@@ -1,0 +1,66 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.container {
+    max-width: 1200px;
+    margin-top: 50px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2, h3 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.panel {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+select, button {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.btn-custom {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-custom:hover {
+    background-color: #0056b3;
+}
+
+#ultimaChamada {
+    text-align: center;
+    font-size: 1.2rem;
+    background: #007bff;
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+#historicoChamadas {
+    list-style: none;
+    padding: 0;
+}
+
+#historicoChamadas li {
+    background: #e9ecef;
+    margin-bottom: 5px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.col-panel {
+    margin-bottom: 30px;
+}

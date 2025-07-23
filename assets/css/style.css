@@ -1,0 +1,153 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    margin: 0;
+    font-size: 16px;
+}
+
+.logo-container {
+	margin-top: 1.5cm !important;
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.logo {
+	max-width: 120px;
+	max-height: auto;
+}
+
+.sidebar {
+    width: 250px;
+    background: #62008f;
+    color: white;
+    padding: 15px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-y: auto;
+}
+
+.sidebar a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.sidebar a:hover {
+    background: #5c2e81;
+}
+
+.content_home {
+    margin-left: 250px; /* Garante que não fique atrás da sidebar */
+    padding: 20px;
+    width: calc(100% - 250px); /* Ajusta a largura automaticamente */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    text-align: center;
+}
+.btn-floating {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	background-color: #62008f;
+	color: white;
+	border-radius: 50%;
+	width: 60px;
+	height: 60px;
+	font-size: 24px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+	transition: background 0.3s ease;
+}
+
+.btn-floating:hover {
+	background-color: #5c2e81;
+	color: white;
+}
+
+/* Estilização da tabela */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Cabeçalho da tabela */
+.table thead {
+    background-color: #62008f;
+    color: #fff;
+    font-weight: bold;
+}
+
+/* Células do cabeçalho */
+.table th {
+	background-color: #62008f !important;
+	color: #fff !important;
+    padding: 12px;
+    text-align: center;
+    border: none;
+}
+
+/* Linhas da tabela */
+.table td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    background-color: #fff;
+}
+
+/* Linhas alternadas */
+.table tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+/* Efeito hover nas linhas */
+.table tbody tr:hover {
+    background-color: #e9ecef;
+    transition: background 0.3s ease-in-out;
+}
+
+/* Bordas arredondadas para a tabela */
+.table-container {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .table {
+        font-size: 14px;
+    }
+    
+    .table th, .table td {
+        padding: 8px;
+    }
+}
+
+/* Efeito hover nas células do corpo da tabela */
+.table tbody tr:hover td {
+    background-color: #e9ecef; /* Cor de fundo ao passar o mouse */
+    transition: background-color 0.3s ease-in-out; /* Efeito suave de transição */
+}
+
+.btn_chamar{
+    background-color: #62008f !important; 
+
+    hover{
+        background-color: #5c2e81 !important;
+        color: white !important;
+        transform: scale(1.05);
+    }
+}
+
+

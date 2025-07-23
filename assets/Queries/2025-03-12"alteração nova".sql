@@ -1,0 +1,1 @@
+ALTER TABLE senhas ADD COLUMN guiche varchar(250);

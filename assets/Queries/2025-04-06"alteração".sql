@@ -1,0 +1,1 @@
+alter table senhas add column hora_finalizacao timestamp;
