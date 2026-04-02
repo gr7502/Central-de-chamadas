@@ -44,8 +44,17 @@ A aplicação permite organizar, chamar e exibir atendimentos de forma clara e f
 
 O sistema segue o padrão do CodeIgniter:
 
-<img src="uploads/home.png" alt="Home do projeto" width="600">
-<img src="uploads/chamada.png" alt="Painel de chamadas" width="600">
-<img src="uploads/painel.png" alt="Painel de exibição" width="600">
+.. image:: uploads/home.png
+   :alt: Home do projeto
+   :width: 600
+
+.. image:: uploads/chamada.png
+   :alt: Painel de chamadas
+   :width: 600
+
+.. image:: uploads/painel.png
+   :alt: Painel de exibicao
+   :width: 600
+
 
 
