@@ -8,7 +8,7 @@ O projeto simula um cenário real de uso, com regras de negócio aplicadas para 
 
 ## 🚀 Visão geral
 
-O **Painel2** é um sistema voltado para ambientes que trabalham com fluxo de atendimento, como:
+O **Central de chamadas** é um sistema voltado para ambientes que trabalham com fluxo de atendimento, como:
 
 - Clínicas
 - Recepções
