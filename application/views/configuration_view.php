@@ -181,14 +181,27 @@
 
         .upload-container {
             display: flex;
-            align-items: center;
-            gap: 20px;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 10px;
         }
 
         .file-upload {
             position: relative;
             overflow: hidden;
             display: inline-block;
+        }
+
+        .file-upload input[type="file"] {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+            margin: 0;
+            padding: 0;
+            border: 0;
         }
 
         .file-upload-btn {
@@ -254,6 +267,18 @@
 
         .preview-img:hover {
             transform: scale(1.02);
+        }
+
+        .preview-video {
+            width: 100%;
+            max-height: 450px;
+            border-radius: 16px;
+            box-shadow: var(--box-shadow);
+            background: #000;
+        }
+
+        .hidden {
+            display: none !important;
         }
 
         .switch-group {
@@ -472,20 +497,20 @@
                 
                 <div class="tab-content active" id="url-tab">
                     <div class="form-group">
-                        <label for="image_url">URL da Imagem</label>
+                        <label for="image_url">URL da Mídia (Imagem ou Vídeo)</label>
                         <input type="text" name="image_url" id="image_url" 
                                value="<?php echo isset($config->image_url) ? $config->image_url : ''; ?>" 
-                               placeholder="https://exemplo.com/imagem.jpg">
+                               placeholder="https://exemplo.com/midia.jpg ou .mp4">
                     </div>
                 </div>
                 
                 <div class="tab-content" id="upload-tab">
                     <div class="form-group">
-                        <label>Upload de Imagem</label>
+                        <label>Upload de Mídia (Imagem ou Vídeo)</label>
                         <div class="upload-container">
                             <div class="file-upload">
                                 <span class="file-upload-btn">Selecionar Arquivo</span>
-                                <input type="file" name="image_file" id="image_file" accept="image/*">
+                                <input type="file" name="image_file" id="image_file" accept="image/*,video/mp4,video/webm">
                             </div>
                             <span class="file-name" id="file-name">Nenhum arquivo selecionado</span>
                         </div>
@@ -494,13 +519,31 @@
                 
                 <button type="submit">Salvar Configurações</button>
             </form>
-            
-            <?php if(isset($config->image_url) && !empty($config->image_url)): ?>
-                <div class="preview-section">
-                    <h2>Prévia da Imagem</h2>
-                    <img src="<?php echo $config->image_url; ?>" alt="Imagem do Painel" class="preview-img" id="image-preview">
-                </div>
-            <?php endif; ?>
+
+            <?php
+                $currentMedia = isset($config->image_url) ? $config->image_url : '';
+                $path = parse_url($currentMedia, PHP_URL_PATH);
+                $ext = strtolower(pathinfo((string) $path, PATHINFO_EXTENSION));
+                $isCurrentVideo = in_array($ext, ['mp4', 'webm']);
+                $hasCurrentMedia = !empty($currentMedia);
+            ?>
+            <div class="preview-section<?php echo $hasCurrentMedia ? '' : ' hidden'; ?>" id="preview-section">
+                <h2>Prévia da Mídia</h2>
+                <img
+                    src="<?php echo htmlspecialchars($currentMedia); ?>"
+                    alt="Mídia do Painel"
+                    class="preview-img<?php echo $isCurrentVideo ? ' hidden' : ''; ?>"
+                    id="image-preview"
+                >
+                <video
+                    src="<?php echo htmlspecialchars($currentMedia); ?>"
+                    class="preview-video<?php echo (!$hasCurrentMedia || !$isCurrentVideo) ? ' hidden' : ''; ?>"
+                    id="video-preview"
+                    controls
+                    muted
+                    playsinline
+                ></video>
+            </div>
         </div>
 
         <!-- Modal para visualização da imagem -->
@@ -528,19 +571,40 @@
         
         const fileInput = document.getElementById('image_file');
         const fileName = document.getElementById('file-name');
+        const previewSection = document.getElementById('preview-section');
+        const imagePreview = document.getElementById('image-preview');
+        const videoPreview = document.getElementById('video-preview');
+        let currentObjectUrl = null;
+
+        function isVideoSource(src) {
+            return /\.(mp4|webm)(\?|#|$)/i.test(src || '');
+        }
+
+        function setPreview(source, isVideo) {
+            previewSection.classList.remove('hidden');
+            if (isVideo) {
+                imagePreview.classList.add('hidden');
+                videoPreview.classList.remove('hidden');
+                videoPreview.src = source;
+                videoPreview.load();
+            } else {
+                videoPreview.classList.add('hidden');
+                videoPreview.pause();
+                imagePreview.classList.remove('hidden');
+                imagePreview.src = source;
+            }
+        }
         
         fileInput.addEventListener('change', (e) => {
             if (e.target.files.length > 0) {
-                fileName.textContent = e.target.files[0].name;
-                const preview = document.getElementById('image-preview');
-                if (preview) {
-                    const file = e.target.files[0];
-                    const reader = new FileReader();
-                    reader.onload = function(event) {
-                        preview.src = event.target.result;
-                    };
-                    reader.readAsDataURL(file);
+                const file = e.target.files[0];
+                fileName.textContent = file.name;
+                if (currentObjectUrl) {
+                    URL.revokeObjectURL(currentObjectUrl);
                 }
+                currentObjectUrl = URL.createObjectURL(file);
+                const isVideoFile = file.type.startsWith('video/') || isVideoSource(file.name);
+                setPreview(currentObjectUrl, isVideoFile);
             } else {
                 fileName.textContent = 'Nenhum arquivo selecionado';
             }
@@ -548,9 +612,8 @@
         
         const urlInput = document.getElementById('image_url');
         urlInput.addEventListener('input', (e) => {
-            const preview = document.getElementById('image-preview');
-            if (preview && e.target.value) {
-                preview.src = e.target.value;
+            if (e.target.value) {
+                setPreview(e.target.value, isVideoSource(e.target.value));
             }
         });
 
@@ -588,6 +651,11 @@
                             otherSwitch.checked = false;
                         }
                     });
+                } else {
+                    const hasAnyChecked = Array.from(switches).some(item => item.checked);
+                    if (!hasAnyChecked) {
+                        this.checked = true;
+                    }
                 }
             });
         });

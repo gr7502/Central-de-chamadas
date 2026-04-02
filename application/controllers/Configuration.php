@@ -19,10 +19,15 @@ class Configuration extends CI_Controller {
     public function update(){
     
     $valid_views = ['painel', 'painel_2', 'painel_3', 'painel_4'];
-    $panel_view = $this->input->post('panel_view');
-    if (! in_array($panel_view, $valid_views)) {
-        redirect('configuration?error=invalid_panel_view');
-        return;
+    $posted_view = $this->input->post('panel_view');
+    $current_view = $this->Configuration_model->get_panel_view();
+
+    if (in_array($posted_view, $valid_views, true)) {
+        $panel_view = $posted_view;
+    } elseif (in_array($current_view, $valid_views, true)) {
+        $panel_view = $current_view;
+    } else {
+        $panel_view = 'painel';
     }
 
     $data = [
@@ -35,7 +40,7 @@ class Configuration extends CI_Controller {
     if (!empty($_FILES['image_file']['name'])) {
         $this->load->library('upload', [
             'upload_path'   => './uploads/',
-            'allowed_types' => 'gif|jpg|png|jpeg|webp|mp4|mp3',
+            'allowed_types' => 'gif|jpg|png|jpeg|webp|mp4|webm',
             'max_size'      => 65535,
         ]);
         if ($this->upload->do_upload('image_file')) {
